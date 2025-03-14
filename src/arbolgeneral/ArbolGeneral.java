@@ -177,9 +177,7 @@ public class ArbolGeneral {
         }
 
     }
-    public static void maxGrado(ArbolGeneral arbol){
-        try
-    }
+    
 
 }
 
