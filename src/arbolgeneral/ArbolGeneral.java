@@ -116,10 +116,6 @@ public class ArbolGeneral {
     }
 
 
-    
-    
-    
-
     public static void main(String[] args) {
 
         ArbolGeneral a = new ArbolGeneral(new NodoGeneral(1));
@@ -146,21 +142,63 @@ public class ArbolGeneral {
 //	    	a.primerHijo().hermano()
             System.out.println("arbol");
             e.pintaArbol(0);
+
+
+            //e.eliminar(c);
+            //e.pintaArbol(0);
+
             System.out.println("--------");
-            System.out.println(a.grado(c));
+            System.out.println(grado(b));
+
             System.out.println("--------");
-
-            e.eliminar(c);
-            e.pintaArbol(0);
-
-
 
         } catch (Exception exc) {
         }
 
     }
 
-    public static int grado(ArbolGeneral arbol) {
-        return 0;
+    public static int grado(ArbolGeneral arbol){
+        try {
+            if (arbol.raiz().primerHijo != null) {
+                int grado = 1;
+                NodoGeneral aux = arbol.raiz().primerHijo;
+                while (aux.hermano != null){
+                    grado++;
+                    aux = aux.hermano;
+                }
+                return grado;
+            }
+            else{
+                return 0;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+
     }
+
+    /*
+    public static int grado(ArbolGeneral arbol) {
+        try {
+            if (arbol.raiz().primerHijo == null) {
+                return 0;
+            } else {
+                if (arbol.raiz().primerHijo.hermano == null)
+                    return 1;
+                else {
+                    if (arbol.hermano() != null)
+                        return 1 + grado(arbol.hermano());
+
+                }
+            } return 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+*/
+
 }
+
