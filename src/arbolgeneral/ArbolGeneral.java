@@ -144,8 +144,8 @@ public class ArbolGeneral {
             e.pintaArbol(0);
 
 
-            //e.eliminar(c);
-            //e.pintaArbol(0);
+            e.eliminar(c);
+            e.pintaArbol(0);
 
             System.out.println("--------");
             System.out.println(grado(b));
@@ -177,28 +177,9 @@ public class ArbolGeneral {
         }
 
     }
-
-    /*
-    public static int grado(ArbolGeneral arbol) {
-        try {
-            if (arbol.raiz().primerHijo == null) {
-                return 0;
-            } else {
-                if (arbol.raiz().primerHijo.hermano == null)
-                    return 1;
-                else {
-                    if (arbol.hermano() != null)
-                        return 1 + grado(arbol.hermano());
-
-                }
-            } return 0;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
+    public static void maxGrado(ArbolGeneral arbol){
+        try
     }
-*/
 
 }
 
