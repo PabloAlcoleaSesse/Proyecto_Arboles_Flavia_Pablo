@@ -156,10 +156,12 @@ public class ArbolGeneral {
         }
 
     }
-
+/*
     public static int grado(ArbolGeneral arbol){
         try {
+            //Check si el arbol esta vacio -> Si no lo esta se ejecuta el codigo dentro del if.
             if (arbol.raiz().primerHijo != null) {
+                
                 int grado = 1;
                 NodoGeneral aux = arbol.raiz().primerHijo;
                 while (aux.hermano != null){
@@ -177,9 +179,25 @@ public class ArbolGeneral {
         }
 
     }
-    public static void maxGrado(ArbolGeneral arbol){
-        try
+*/
+public static int grado(ArbolGeneral arbol) {
+    try {
+        if (arbol.esVacio()) {
+            return 0;
+        }
+        return contarHijosRecursivamente(arbol.raiz().primerHijo);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return 0;
     }
+}
 
+    private static int contarHijosRecursivamente(NodoGeneral hijo) {
+        if (hijo == null) {
+            return 0;
+        }
+        // Count this node plus all its siblings recursively
+        return 1 + contarHijosRecursivamente(hijo.hermano);
+    }
 }
 
