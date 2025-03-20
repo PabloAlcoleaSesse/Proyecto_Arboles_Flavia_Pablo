@@ -156,6 +156,25 @@ public class ArbolGeneral {
         }
 
     }
+    public static int grado(ArbolGeneral arbol) {
+        try {
+            if (arbol.esVacio()) {
+                return 0;
+            }
+            return contarHijosRecursivamente(arbol.raiz().primerHijo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    private static int contarHijosRecursivamente(NodoGeneral hijo) {
+        if (hijo == null) {
+            return 0;
+        }
+        // Count this node plus all its siblings recursively
+        return 1 + contarHijosRecursivamente(hijo.hermano);
+    }
 /*
     public static int grado(ArbolGeneral arbol){
         try {
@@ -180,24 +199,7 @@ public class ArbolGeneral {
 
     }
 */
-public static int grado(ArbolGeneral arbol) {
-    try {
-        if (arbol.esVacio()) {
-            return 0;
-        }
-        return contarHijosRecursivamente(arbol.raiz().primerHijo);
-    } catch (Exception e) {
-        e.printStackTrace();
-        return 0;
-    }
-}
 
-    private static int contarHijosRecursivamente(NodoGeneral hijo) {
-        if (hijo == null) {
-            return 0;
-        }
-        // Count this node plus all its siblings recursively
-        return 1 + contarHijosRecursivamente(hijo.hermano);
-    }
+
 }
 
