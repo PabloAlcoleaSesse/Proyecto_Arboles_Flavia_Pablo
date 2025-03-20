@@ -116,10 +116,6 @@ public class ArbolGeneral {
     }
 
 
-    
-    
-    
-
     public static void main(String[] args) {
 
         ArbolGeneral a = new ArbolGeneral(new NodoGeneral(1));
@@ -146,21 +142,63 @@ public class ArbolGeneral {
 //	    	a.primerHijo().hermano()
             System.out.println("arbol");
             e.pintaArbol(0);
-            System.out.println("--------");
-            System.out.println(a.grado(c));
-            System.out.println("--------");
+
 
             e.eliminar(c);
             e.pintaArbol(0);
 
+            System.out.println("--------");
+            System.out.println(grado(b));
 
+            System.out.println("--------");
 
         } catch (Exception exc) {
         }
 
     }
+/*
+    public static int grado(ArbolGeneral arbol){
+        try {
+            //Check si el arbol esta vacio -> Si no lo esta se ejecuta el codigo dentro del if.
+            if (arbol.raiz().primerHijo != null) {
+                
+                int grado = 1;
+                NodoGeneral aux = arbol.raiz().primerHijo;
+                while (aux.hermano != null){
+                    grado++;
+                    aux = aux.hermano;
+                }
+                return grado;
+            }
+            else{
+                return 0;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
 
-    public static int grado(ArbolGeneral arbol) {
+    }
+*/
+
+public static int grado(ArbolGeneral arbol) {
+    try {
+        if (arbol.esVacio()) {
+            return 0;
+        }
+        return contarHijosRecursivamente(arbol.raiz().primerHijo);
+    } catch (Exception e) {
+        e.printStackTrace();
         return 0;
     }
 }
+
+    private static int contarHijosRecursivamente(NodoGeneral hijo) {
+        if (hijo == null) {
+            return 0;
+        }
+        // Count this node plus all its siblings recursively
+        return 1 + contarHijosRecursivamente(hijo.hermano);
+    }
+}
+
