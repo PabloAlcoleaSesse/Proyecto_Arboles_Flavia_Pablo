@@ -149,6 +149,7 @@ public class ArbolGeneral {
 
             System.out.println("--------");
             System.out.println(grado(b));
+            System.out.println(contarHijosPorEliminacion(b));
 
             System.out.println("--------");
 
@@ -156,49 +157,71 @@ public class ArbolGeneral {
         }
 
     }
-/*
-    public static int grado(ArbolGeneral arbol){
+
+
+
+    public static int grado(ArbolGeneral arbol) {
         try {
-            //Check si el arbol esta vacio -> Si no lo esta se ejecuta el codigo dentro del if.
-            if (arbol.raiz().primerHijo != null) {
-                
-                int grado = 1;
-                NodoGeneral aux = arbol.raiz().primerHijo;
-                while (aux.hermano != null){
-                    grado++;
-                    aux = aux.hermano;
-                }
-                return grado;
-            }
-            else{
+            if (arbol.esVacio()) {
                 return 0;
             }
-        }catch(Exception e){
+            // Llamada a la versión sobrecargada con el primer hijo de la raíz
+            return grado(arbol.raiz().primerHijo);
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
-
     }
-*/
 
-public static int grado(ArbolGeneral arbol) {
-    try {
-        if (arbol.esVacio()) {
+        // Metodo sobrecargado para la recursión interna
+
+    private static int grado(NodoGeneral nodo) {
+        if (nodo == null) {
             return 0;
         }
-        return contarHijosRecursivamente(arbol.raiz().primerHijo);
-    } catch (Exception e) {
-        e.printStackTrace();
-        return 0;
+        // Cuenta este nodo más todos sus hermanos recursivamente
+        return 1 + grado(nodo.hermano);
     }
-}
 
-    private static int contarHijosRecursivamente(NodoGeneral hijo) {
-        if (hijo == null) {
+    public static int gradoFinal(ArbolGeneral arbol){
+        try{
+            if(arbol.esVacio()){
+                return 0;
+            }
+            arbol.eliminar(arbol.primerHijo());
+            return 1 + gradoFinal(arbol);
+        } catch(Exception e){
+            e.printStackTrace();
             return 0;
         }
-        // Count this node plus all its siblings recursively
-        return 1 + contarHijosRecursivamente(hijo.hermano);
     }
+    public static int contarHijosPorEliminacion(ArbolGeneral arbol) {
+        // Base case: if the tree is empty or null
+        if (arbol == null || arbol.esVacio()) {
+            return 0;
+        }
+
+        try {
+            // Create a copy to avoid modifying the original
+            ArbolGeneral copia = new ArbolGeneral(arbol.raiz);
+            // Get the first child
+            ArbolGeneral hijo = copia.primerHijo();
+
+            // If there's no first child, we're done counting
+            if (hijo.esVacio()) {
+                return 0;
+            }
+
+            // Eliminate the first child
+            copia.eliminar(hijo);
+
+            // Count this child (1) plus the count of remaining children
+            return 1 + contarHijosPorEliminacion(copia);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }
 
