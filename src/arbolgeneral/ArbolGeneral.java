@@ -183,34 +183,4 @@ public class ArbolGeneral {
         return 1 + grado(nodo.hermano);
     }
 //____-____________________________________________________________________________________
-   //Segundo metodo para contar los hijos de un arbol
-    public static int contarHijosPorEliminacion(ArbolGeneral arbol) {
-        // Base case: if the tree is empty or null
-        if (arbol == null || arbol.esVacio()) {
-            return 0;
-        }
-
-        try {
-            // Create a copy to avoid modifying the original
-            ArbolGeneral copia = new ArbolGeneral(arbol.raiz);
-            // Get the first child
-            ArbolGeneral hijo = copia.primerHijo();
-
-            // If there's no first child, we're done counting
-            if (hijo.esVacio()) {
-                return 0;
-            }
-
-            // Eliminate the first child
-            copia.eliminar(hijo);
-
-            // Count this child (1) plus the count of remaining children
-            return 1 + contarHijosPorEliminacion(copia);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-}
-
+   
