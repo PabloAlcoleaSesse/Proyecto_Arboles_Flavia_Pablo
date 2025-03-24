@@ -158,7 +158,7 @@ public class ArbolGeneral {
 
     }
 //____-____________________________________________________________________________________
-    //Primer metodo para contar los hijos de un arbol
+    //Primer metodo para contar los hijos de un arbol (en el README aparece un segundo método, se podria hacer con cualquiera de los dos)
 
     public static int grado(ArbolGeneral arbol) {
         try {
@@ -182,5 +182,4 @@ public class ArbolGeneral {
         // Cuenta este nodo más todos sus hermanos recursivamente
         return 1 + grado(nodo.hermano);
     }
-//____-____________________________________________________________________________________
    
