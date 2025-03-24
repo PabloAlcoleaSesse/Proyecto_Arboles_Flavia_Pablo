@@ -2,7 +2,7 @@
 Problema: Realizar un código que sea capaz de a través de unos datos iniciales proporcionar el numero de hermanos que tendrá cada sujeto. Con esto tambien se podrá saber el rango del árbol.
 
 Procedimiento: 
-
+El método contarHijosPorEliminacion cuenta cuántos hijos tiene un nodo en un árbol mediante la eliminacion recursiva de el primer hijo de dicho arbol. Para ello realiza una copia del arbol, asi no afectará al arbol original.
 
 //Segundo metodo para contar los hijos de un arbol
     
