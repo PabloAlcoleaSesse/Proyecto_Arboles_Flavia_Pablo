@@ -157,8 +157,8 @@ public class ArbolGeneral {
         }
 
     }
-
-
+//____-____________________________________________________________________________________
+    //Primer metodo para contar los hijos de un arbol
 
     public static int grado(ArbolGeneral arbol) {
         try {
@@ -182,19 +182,8 @@ public class ArbolGeneral {
         // Cuenta este nodo más todos sus hermanos recursivamente
         return 1 + grado(nodo.hermano);
     }
-
-    public static int gradoFinal(ArbolGeneral arbol){
-        try{
-            if(arbol.esVacio()){
-                return 0;
-            }
-            arbol.eliminar(arbol.primerHijo());
-            return 1 + gradoFinal(arbol);
-        } catch(Exception e){
-            e.printStackTrace();
-            return 0;
-        }
-    }
+//____-____________________________________________________________________________________
+   //Segundo metodo para contar los hijos de un arbol
     public static int contarHijosPorEliminacion(ArbolGeneral arbol) {
         // Base case: if the tree is empty or null
         if (arbol == null || arbol.esVacio()) {
