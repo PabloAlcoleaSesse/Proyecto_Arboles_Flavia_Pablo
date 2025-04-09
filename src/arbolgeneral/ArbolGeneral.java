@@ -148,7 +148,7 @@ public class ArbolGeneral {
             e.pintaArbol(0);
 
             System.out.println("--------");
-            System.out.println(grado(b));
+            System.out.println(grado(e));
             System.out.println(contarHijosPorEliminacion(b));
 
             System.out.println("--------");
@@ -157,29 +157,69 @@ public class ArbolGeneral {
         }
 
     }
-//____-____________________________________________________________________________________
-    //Primer metodo para contar los hijos de un arbol (en el README aparece un segundo método, se podria hacer con cualquiera de los dos)
+//_________________________________________________________________________________________
+    //Primer metodo para contar los hijos de un arbol
 
     public static int grado(ArbolGeneral arbol) {
+        if (arbol == null || arbol.esVacio()) {
+            return 0;
+        }
+
         try {
-            if (arbol.esVacio()) {
-                return 0;
-            }
-            // Llamada a la versión sobrecargada con el primer hijo de la raíz
-            return grado(arbol.raiz().primerHijo);
+            return gradoRecursivo(arbol.raiz());
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
     }
 
-        // Metodo sobrecargado para la recursión interna
-
-    private static int grado(NodoGeneral nodo) {
+    private static int gradoRecursivo(NodoGeneral nodo) {
         if (nodo == null) {
             return 0;
         }
-        // Cuenta este nodo más todos sus hermanos recursivamente
-        return 1 + grado(nodo.hermano);
+
+        // Contar número de hijos del nodo actual
+        int contador = 0;
+        NodoGeneral hijo = nodo.primerHijo;
+        while (hijo != null) {
+            contador++;
+            hijo = hijo.hermano;
+        }
+
+        // Recorremos recursivamente cada hijo
+        int maxGradoHijos = 0;
+        hijo = nodo.primerHijo;
+        while (hijo != null) {
+            maxGradoHijos = Math.max(maxGradoHijos, gradoRecursivo(hijo));
+            hijo = hijo.hermano;
+        }
+
+        return Math.max(contador, maxGradoHijos);
     }
-   
+//_________________________________________________________________________________________
+   //Segundo metodo para contar los hijos de un arbol
+    public static int contarHijosPorEliminacion(ArbolGeneral arbol) {
+
+        if (arbol == null || arbol.esVacio()) {
+            return 0;
+        }
+
+        try {
+
+            ArbolGeneral copia = new ArbolGeneral(arbol.raiz);
+            ArbolGeneral hijo = copia.primerHijo();
+
+            if (hijo.esVacio()) {
+                return 0;
+            }
+
+            copia.eliminar(hijo);
+
+            return 1 + contarHijosPorEliminacion(copia);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+}
