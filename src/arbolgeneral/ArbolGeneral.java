@@ -149,7 +149,7 @@ public class ArbolGeneral {
 
             System.out.println("--------");
             System.out.println(grado(e));
-            System.out.println(contarHijosPorEliminacion(b));
+
 
             System.out.println("--------");
 
@@ -157,8 +157,7 @@ public class ArbolGeneral {
         }
 
     }
-//_________________________________________________________________________________________
-    //Primer metodo para contar los hijos de un arbol
+//________________________________________________________________________________________
 
     public static int grado(ArbolGeneral arbol) {
         if (arbol == null || arbol.esVacio()) {
@@ -173,12 +172,13 @@ public class ArbolGeneral {
         }
     }
 
+
     private static int gradoRecursivo(NodoGeneral nodo) {
         if (nodo == null) {
             return 0;
         }
 
-        // Contar número de hijos del nodo actual
+
         int contador = 0;
         NodoGeneral hijo = nodo.primerHijo;
         while (hijo != null) {
@@ -186,7 +186,6 @@ public class ArbolGeneral {
             hijo = hijo.hermano;
         }
 
-        // Recorremos recursivamente cada hijo
         int maxGradoHijos = 0;
         hijo = nodo.primerHijo;
         while (hijo != null) {
@@ -196,30 +195,4 @@ public class ArbolGeneral {
 
         return Math.max(contador, maxGradoHijos);
     }
-//_________________________________________________________________________________________
-   //Segundo metodo para contar los hijos de un arbol
-    public static int contarHijosPorEliminacion(ArbolGeneral arbol) {
-
-        if (arbol == null || arbol.esVacio()) {
-            return 0;
-        }
-
-        try {
-
-            ArbolGeneral copia = new ArbolGeneral(arbol.raiz);
-            ArbolGeneral hijo = copia.primerHijo();
-
-            if (hijo.esVacio()) {
-                return 0;
-            }
-
-            copia.eliminar(hijo);
-
-            return 1 + contarHijosPorEliminacion(copia);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
 }
