@@ -196,30 +196,4 @@ public class ArbolGeneral {
 
         return Math.max(contador, maxGradoHijos);
     }
-//_________________________________________________________________________________________
-   //Segundo metodo para contar los hijos de un arbol
-    public static int contarHijosPorEliminacion(ArbolGeneral arbol) {
 
-        if (arbol == null || arbol.esVacio()) {
-            return 0;
-        }
-
-        try {
-
-            ArbolGeneral copia = new ArbolGeneral(arbol.raiz);
-            ArbolGeneral hijo = copia.primerHijo();
-
-            if (hijo.esVacio()) {
-                return 0;
-            }
-
-            copia.eliminar(hijo);
-
-            return 1 + contarHijosPorEliminacion(copia);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-}
